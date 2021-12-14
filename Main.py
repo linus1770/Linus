@@ -352,7 +352,7 @@ def lv2(room_obj_list, hole_chance):
         if room.hole == False and room.bat == False and room.player == False and room.number == 1:
             chance = random.random()
             if chance <= hole_chance:
-                self.hole = True
+                hole = True
     while True:
         cur_room = find_cur_room(room_obj_list)
         gameover = cur_room.turn_out(room_obj_list)
