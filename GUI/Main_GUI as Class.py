@@ -26,7 +26,7 @@ class Gui():
         self.colors = {"WHITE" : (255, 255, 255), "BLACK" : (0, 0, 0), "GREEN" : (0, 255, 0), "YELLOW" : (249, 249, 50), "ORANGE" : (255, 128, 0), "RED" : (195, 26, 33), "BLUE" : (49, 184, 252)}
 
         # Scaled pictures
-        self.empty_room = pg.transform.scale(pg.image.load(os.path.join("GUI", "Assets", "room.png")),(self.ROOM_WIDTH, self.ROOM_HEIGHT))
+        self.empty_room = pg.transform.scale(pg.image.load(os.path.join("GUI", "Assets", "room_empty.jpg")),(self.ROOM_WIDTH, self.ROOM_HEIGHT))
         self.arrow_in_room = pg.transform.scale(pg.image.load(os.path.join("GUI", "Assets", "room_arrow.jpg")),(self.ROOM_WIDTH, self.ROOM_HEIGHT))
         self.shoot_room = pg.transform.scale(pg.image.load(os.path.join("GUI", "Assets", "room_shoot.jpg")),(self.ROOM_WIDTH, self.ROOM_HEIGHT))
         self.hole_room = pg.transform.scale(pg.image.load(os.path.join("GUI", "Assets", "room_hole.jpg")),(self.ROOM_WIDTH, self.ROOM_HEIGHT))
@@ -146,11 +146,11 @@ class Gui():
 
         # Makes a list (dangers) with every "danger" in adjacent rooms
         for adj_room in room.adjacent_rooms:
-            if adj_room.hole == True:
+            if adj_room.hole:
                 dangers.append("hole")
-            elif adj_room.bat == True:
+            elif adj_room.bat:
                 dangers.append("bat")
-            elif adj_room.wumpus == True:
+            elif adj_room.wumpus:
                 dangers.append("wumpus")
 
         # Turns list to dictonary with number of each danger 
@@ -187,7 +187,7 @@ class Gui():
     ''' Checks room list for room with player in it and returns it '''
     def find_cur_room(self, room_obj_list):
         for room in room_obj_list:
-            if room.player == True:
+            if room.player:
                 return room
 
     ''' Moves players current room '''
@@ -343,7 +343,7 @@ class Gui():
         direction = []
         # Checks for avalible direction for wumpus to move and ad it to direction
         for room in room_obj_list:
-            if room.wumpus == True:
+            if room.wumpus:
                 if room.north.hole == False:
                     direction.append(room.north)
                 if room.south.hole == False:
@@ -364,7 +364,7 @@ class Gui():
                     pass
 
                 # Prints text if Wumpus move else that he is trapped
-                if room.wumpus == True:
+                if room.wumpus:
                     wumpus_moves_str = "You hear Wumpus screaming in frustration"
                     wumpus_moves_str = ""
                 elif room.wumpus == False:
@@ -470,46 +470,38 @@ class Gui():
         rectagel = pg.Rect(10, 10, self.WIDTH-20, self.HEIGHT-20)
         pg.draw.rect(self.window, self.colors["YELLOW"], rectagel)
 
-        # Render the Rules
-        rules_txt_1 = self.font_txt.render("You're locked in the culverts below CSC, where the voracious Wumpus lives.", 1, self.colors["BLACK"])
-        rules_txt_2 = self.font_txt.render("To avoid being eaten up and unlocking the door, you need to shoot Wumpus with your bow and arrow.", 1, self.colors["BLACK"])
-        rules_txt_3 = self.font_txt.render("The culverts have 20 rooms that are connected by narrow corridors.", 1, self.colors["BLACK"])
-        rules_txt_4 = self.font_txt.render("You can move north, east, south or west from one room to another.", 1, self.colors["BLACK"])
-        
-        rules_txt_5 = self.font_txt.render("However, there are dangers lurking here. In some rooms there are bottomless holes.", 1, self.colors["BLACK"])
-        rules_txt_6 = self.font_txt.render("If you step into one, you die immediately. In other rooms there are bats that lift you up,", 1, self.colors["BLACK"])
-        rules_txt_7 = self.font_txt.render("fly a bit and drop you into an arbitrary room. In one of the rooms is Wumpus,", 1, self.colors["BLACK"])
-        rules_txt_8 = self.font_txt.render("and if you venture into that room you will immediately be eaten up.", 1, self.colors["BLACK"])
-        rules_txt_9 = self.font_txt.render("Fortunately, from the rooms next door you can feel the gust of wind from an bottomless hole", 1, self.colors["BLACK"])
-        rules_txt_10 = self.font_txt.render("or the smell of Wumpus. You also get the numbers of each room which are adjacent.", 1, self.colors["BLACK"])
-        
-        rules_txt_11 = self.font_txt.render("To win the game, you must shoot Wumpus and find the way out. When you shoot an arrow, it moves through three rooms", 1, self.colors["BLACK"])
-        rules_txt_12 = self.font_txt.render("- you can control which direction the arrow should choose in each room.", 1, self.colors["BLACK"])
-        rules_txt_13 = self.font_txt.render("Do not forget that the tunnels wind in unexpected ways. You may shoot yourself ...", 1, self.colors["BLACK"])
-        rules_txt_14 = self.font_txt.render("You have a limited supplie of arrows. Good luck!", 1, self.colors["BLACK"])
+        rules_txt_list = []
+        # Adds rules to list
+        rules_txt_list.append("You're locked in the culverts below CSC, where the voracious Wumpus lives.")
+        rules_txt_list.append("To avoid being eaten up and unlocking the door, you need to shoot Wumpus with your bow and arrow.")
+        rules_txt_list.append("The culverts have 20 rooms that are connected by narrow corridors.")
+        rules_txt_list.append("You can move north, east, south or west from one room to another.")
 
-        return_txt = self.font_menu.render("Click on screen to return", 1, self.colors["BLACK"])
+        rules_txt_list.append("")
+        rules_txt_list.append("However, there are dangers lurking here. In some rooms there are bottomless holes.")
+        rules_txt_list.append("If you step into one, you die immediately. In other rooms there are bats that lift you up,")
+        rules_txt_list.append("fly a bit and drop you into an arbitrary room. In one of the rooms is Wumpus,")
+        rules_txt_list.append("and if you venture into that room you will immediately be eaten up.")
+        rules_txt_list.append("Fortunately, from the rooms next door you can feel the gust of wind from an bottomless hole")
+        rules_txt_list.append("or the smell of Wumpus. You also get the numbers of each room which are adjacent.")
+
+        rules_txt_list.append("")
+        rules_txt_list.append("To win the game, you must shoot Wumpus and find the way out. When you shoot an arrow, it moves through three rooms")
+        rules_txt_list.append("- you can control which direction the arrow should choose in each room.")
+        rules_txt_list.append("Do not forget that the tunnels wind in unexpected ways. You may shoot yourself ...")
+        rules_txt_list.append("You have a limited supplie of arrows. Good luck!")
 
         text_x = 15
         text_y = 15
         distance = 20
 
         # Prints the Rules
-        self.window.blit(rules_txt_1, (text_x, text_y+(distance*0)))
-        self.window.blit(rules_txt_2, (text_x, text_y+(distance*1)))
-        self.window.blit(rules_txt_3, (text_x, text_y+(distance*2)))
-        self.window.blit(rules_txt_4, (text_x, text_y+(distance*3)))
-        self.window.blit(rules_txt_5, (text_x, text_y+(distance*4)))
-        self.window.blit(rules_txt_6, (text_x, text_y+(distance*6)))
-        self.window.blit(rules_txt_7, (text_x, text_y+(distance*7)))
-        self.window.blit(rules_txt_8, (text_x, text_y+(distance*8)))
-        self.window.blit(rules_txt_9, (text_x, text_y+(distance*9)))
-        self.window.blit(rules_txt_10, (text_x, text_y+(distance*10)))
-        self.window.blit(rules_txt_11, (text_x, text_y+(distance*12)))
-        self.window.blit(rules_txt_12, (text_x, text_y+(distance*13)))
-        self.window.blit(rules_txt_13, (text_x, text_y+(distance*14)))
-        self.window.blit(rules_txt_14, (text_x, text_y+(distance*15)))
-        self.window.blit(return_txt, (text_x, text_y+(distance*19)))
+        for index, string in enumerate(rules_txt_list):
+            renderd_string = self.font_txt.render(string, 1, self.colors["BLACK"])
+            self.window.blit(renderd_string, (text_x, text_y+(distance*index)))
+
+        # Prints return text
+        self.window.blit(self.font_menu.render("Click on screen to return", 1, self.colors["BLACK"]),(50, 510))
 
         # Updates the rules
         pg.display.update()  
@@ -570,7 +562,7 @@ class Gui():
         return peacful, eazy, normal, hard
 
     ''' Draws game window on screen '''
-    def draw_game(self, room_obj_list, arrows, txt_rectangel, side_rectangel_l, rooms_traveld):
+    def draw_game(self, room_obj_list, arrows, txt_rectangel, side_rectangel_l, south_rectangel, rooms_traveld):
         # Resets the screen
         self.window.fill(self.colors["BLACK"])
 
@@ -578,6 +570,10 @@ class Gui():
         self.window.blit(self.empty_room, (self.WIDTH/2-self.ROOM_WIDTH/2, 10))
         pg.draw.rect(self.window, self.colors["WHITE"], txt_rectangel)
         pg.draw.rect(self.window, self.colors["WHITE"], side_rectangel_l)
+
+        # Draws rectangel for clicking on for moving south
+        pg.draw.rect(self.window, self.colors["RED"], south_rectangel)
+        self.window.blit(self.font_txt.render("SOUTH", 1, self.colors["WHITE"]), (420, 382))
 
         # Draws arrows and number of arrows left
         self.window.blit(self.arrows_pic, (side_rectangel_l.x+1, side_rectangel_l.y+5))
@@ -717,6 +713,7 @@ class Gui():
         # Defines rectangel (botten and left)
         txt_rectangel = pg.Rect(self.WIDTH/2-self.ROOM_WIDTH/2, self.ROOM_HEIGHT+20, self.ROOM_WIDTH, self.HEIGHT-self.ROOM_HEIGHT-30)
         side_rectangel_l = pg.Rect(10, 10, (self.WIDTH-self.ROOM_WIDTH)/2-20, self.ROOM_HEIGHT)
+        south_rectangel = pg.Rect(394, 376, (503-394), (401-376))
 
         # Game_state controlls game loop (what to draw and click on)
         game_state = "menu"
@@ -854,7 +851,7 @@ class Gui():
                     if event.type == pg.MOUSEBUTTONDOWN and event.button == 3 and click:
                         click = False
                         for room in room_obj_list:
-                            if room.arrow == True:
+                            if room.arrow:
                                 arrow_room = room
                         result_fire = self.click_doors_arrow(arrow_room, room_obj_list, game_state)
                         game_state = result_fire[1]
@@ -886,6 +883,9 @@ class Gui():
                         name = self.letter_input(event, name)
                         if event.key == pg.K_RETURN:
                             game_state = "victory_2"
+                            # If player just click enter don't save score
+                            if name == "":
+                                name = None
                             self.make_score_board(name, difficulty[4])
                     if len(name) == 5:
                         if event.type == pg.KEYDOWN: 
@@ -896,7 +896,7 @@ class Gui():
                                 game_state = "victory_2"
 
         #-------Controlls-Draw-Functions-------#
-            # If draw screen for each game_state
+            # Draw screen for each game_state
             if game_state == "menu":
                 menu_rect = self.draw_menu()
             elif game_state == "rules":
@@ -914,7 +914,7 @@ class Gui():
                         self.score = 100
                         random_rooms = True
                     
-                    result = self.draw_game(room_obj_list, arrows, txt_rectangel, side_rectangel_l, rooms_traveld)
+                    result = self.draw_game(room_obj_list, arrows, txt_rectangel, side_rectangel_l, south_rectangel, rooms_traveld)
 
                     # Check result 
                     if result in ["sacrificed", "falling", "eaten"]:
@@ -925,7 +925,7 @@ class Gui():
                 if flown:
                     self.print_flown(txt_rectangel, side_rectangel_l, game_state)
 
-            # Prints screen acording to game_state
+            # Draws screen acording to game_state
             elif game_state == "fire":
                 self.draw_fire(txt_rectangel, rooms_traveld)
             elif game_state in ["victory", "victory_2"]:
