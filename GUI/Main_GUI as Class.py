@@ -749,7 +749,7 @@ class Gui():
 
                 # Checks if click on menu rectangel with leftbutton and chage game_state
                 if game_state == "menu":
-                    if event.type == pg.MOUSEBUTTONDOWN and event.button == 1 and click == True:
+                    if event.type == pg.MOUSEBUTTONDOWN and event.button == 1 and click:
                         click = False
                         pos = pg.mouse.get_pos()
                         if menu_rect[0].collidepoint(pos):
@@ -766,13 +766,13 @@ class Gui():
 
                 # Check if click on screen sets game_state to menu
                 if game_state in ["rules" , "score"]:
-                    if event.type == pg.MOUSEBUTTONDOWN and event.button == 1 and click == True:
+                    if event.type == pg.MOUSEBUTTONDOWN and event.button == 1 and click:
                         click = False
                         game_state = "menu"
                     
                 # Check if click on title menu sets game_state to menu
                 if game_state in ["loss", "victory_2"]:
-                    if event.type == pg.MOUSEBUTTONDOWN and event.button == 1 and click == True:
+                    if event.type == pg.MOUSEBUTTONDOWN and event.button == 1 and click:
                         click = False
                         pos = pg.mouse.get_pos()
                         if 308 <= pos[0] <= 589 and 264 <= pos[1] <= 296:
@@ -781,7 +781,7 @@ class Gui():
                 # Checks if click on difficulty rectangel with leftbutton and chage game_state back to menu
                 # And chages to respective difficulty
                 if game_state == "difficulty":
-                    if event.type == pg.MOUSEBUTTONDOWN and event.button == 1 and click == True:
+                    if event.type == pg.MOUSEBUTTONDOWN and event.button == 1 and click:
                         click = False
                         pos = pg.mouse.get_pos()
                         if difficulty_rect[0].collidepoint(pos):
@@ -804,7 +804,7 @@ class Gui():
                 if game_state == "play":
 
                     # If it is left click moves
-                    if event.type == pg.MOUSEBUTTONDOWN and event.button == 1 and click == True:
+                    if event.type == pg.MOUSEBUTTONDOWN and event.button == 1 and click:
                         click = False
 
                         # Take out curent player number and moves througe clicked door
