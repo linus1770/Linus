@@ -1,6 +1,6 @@
 import random
 class Wumpus_class:
-    ''' makes obeject wiout dangers '''
+    ''' Makes obeject without dangers '''
     def __init__(self, number):
         self.number = number
         self.wumpus = False
@@ -150,16 +150,16 @@ class Wumpus_class:
                 print("you are lifted up into the air.")
                 print("After a short flight, you are dropped down to room number", str(new_room.number))
                 gameover = False
-            # If dropped at Wumpus = Losses
+            # If dropped at Wumpus => Losses
             else:
                 print("You feel bat wings against your cheek and before you have gotten time to react, ", end="") 
                 print("you are lifted up into the air. Then flown to Wumpus and sacrificed")
 
-        # If in a Hole room = losses
+        # If in a Hole room => losses
         elif self.hole == True:
             print("You stepped into a bottomless pit. To never be found again.")
 
-        # If in a Wumpuses room = losses
+        # If in a Wumpuses room => losses
         elif self.wumpus == True:
             print("You step into the room which is full of foul-smelling smoke.")
             print("But before you have time to hold your breath, the most vile gap you have ever seen")

@@ -26,14 +26,14 @@ class Gui():
         self.colors = {"WHITE" : (255, 255, 255), "BLACK" : (0, 0, 0), "GREEN" : (0, 255, 0), "YELLOW" : (249, 249, 50), "ORANGE" : (255, 128, 0), "RED" : (195, 26, 33), "BLUE" : (49, 184, 252)}
 
         # Scaled pictures
-        self.empty_room = pg.transform.scale(pg.image.load(os.path.join("Assets", "room.png")),(self.ROOM_WIDTH, self.ROOM_HEIGHT))
-        self.arrow_in_room = pg.transform.scale(pg.image.load(os.path.join("Assets", "room_arrow.jpg")),(self.ROOM_WIDTH, self.ROOM_HEIGHT))
-        self.shoot_room = pg.transform.scale(pg.image.load(os.path.join("Assets", "room_shoot.jpg")),(self.ROOM_WIDTH, self.ROOM_HEIGHT))
-        self.hole_room = pg.transform.scale(pg.image.load(os.path.join("Assets", "room_hole.jpg")),(self.ROOM_WIDTH, self.ROOM_HEIGHT))
-        self.wumpus_room = pg.transform.scale(pg.image.load(os.path.join("Assets", "room_wumpus.jpg")),(self.ROOM_WIDTH, self.ROOM_HEIGHT))
-        self.victory_room = pg.transform.scale(pg.image.load(os.path.join("Assets", "room_victory.jpg")),(self.ROOM_WIDTH, self.ROOM_HEIGHT))
-        self.arrows_pic = pg.transform.scale(pg.image.load(os.path.join("Assets", "arrows.png")),(75, 40))
-        self.bat = pg.transform.scale(pg.image.load(os.path.join("Assets", "bat.png")),(120, 70))
+        self.empty_room = pg.transform.scale(pg.image.load(os.path.join("GUI", "Assets", "room.png")),(self.ROOM_WIDTH, self.ROOM_HEIGHT))
+        self.arrow_in_room = pg.transform.scale(pg.image.load(os.path.join("GUI", "Assets", "room_arrow.jpg")),(self.ROOM_WIDTH, self.ROOM_HEIGHT))
+        self.shoot_room = pg.transform.scale(pg.image.load(os.path.join("GUI", "Assets", "room_shoot.jpg")),(self.ROOM_WIDTH, self.ROOM_HEIGHT))
+        self.hole_room = pg.transform.scale(pg.image.load(os.path.join("GUI", "Assets", "room_hole.jpg")),(self.ROOM_WIDTH, self.ROOM_HEIGHT))
+        self.wumpus_room = pg.transform.scale(pg.image.load(os.path.join("GUI", "Assets", "room_wumpus.jpg")),(self.ROOM_WIDTH, self.ROOM_HEIGHT))
+        self.victory_room = pg.transform.scale(pg.image.load(os.path.join("GUI", "Assets", "room_victory.jpg")),(self.ROOM_WIDTH, self.ROOM_HEIGHT))
+        self.arrows_pic = pg.transform.scale(pg.image.load(os.path.join("GUI", "Assets", "arrows.png")),(75, 40))
+        self.bat = pg.transform.scale(pg.image.load(os.path.join("GUI", "Assets", "bat.png")),(120, 70))
 
     #-------Start-functions-------#
 
