@@ -905,6 +905,7 @@ class Gui():
                 difficulty_rect = self.draw_set_difficulty()
             elif game_state == "score":
                 self.draw_score_board(None, difficulty[4])
+            # First check what play screen to draw (play regular or flown)
             elif game_state == "play":
                 if flown != True:
 
@@ -913,7 +914,7 @@ class Gui():
                         room_obj_list = self.room_list(difficulty[0], difficulty[1])
                         self.score = 100
                         random_rooms = True
-                    
+                    # Draws play regular screen
                     result = self.draw_game(room_obj_list, arrows, txt_rectangel, side_rectangel_l, south_rectangel, rooms_traveld)
 
                     # Check result 
@@ -923,6 +924,7 @@ class Gui():
                     if result == "flown":
                         flown = True
                 if flown:
+                    # Draws flown screen (if player gone in a room with bat)
                     self.print_flown(txt_rectangel, side_rectangel_l, game_state)
 
             # Draws screen acording to game_state
