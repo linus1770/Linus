@@ -253,69 +253,6 @@ class Gui():
         # returns true if player moves to diffrent room and new or same game_state
         return moves, game_state
 
-    ''' Lets player modify sting input with only letters '''
-    def letter_input(self, event, string):
-        # Adds Uppercase of clicked letter to string
-        if event.key == pg.K_a:
-            string += str(chr(event.key)).upper()
-        if event.key == pg.K_b:
-            string += str(chr(event.key)).upper()
-        if event.key == pg.K_c:
-            string += str(chr(event.key)).upper()
-        if event.key == pg.K_d:
-            string += str(chr(event.key)).upper()
-        if event.key == pg.K_e:
-            string += str(chr(event.key)).upper()
-        if event.key == pg.K_f:
-            string += str(chr(event.key)).upper()
-        if event.key == pg.K_g:
-            string += str(chr(event.key)).upper()
-        if event.key == pg.K_h:
-            string += str(chr(event.key)).upper()
-        if event.key == pg.K_i:
-            string += str(chr(event.key)).upper()
-        if event.key == pg.K_j:
-            string += str(chr(event.key)).upper()
-        if event.key == pg.K_k:
-            string += str(chr(event.key)).upper()
-        if event.key == pg.K_l:
-            string += str(chr(event.key)).upper()
-        if event.key == pg.K_m:
-            string += str(chr(event.key)).upper()
-        if event.key == pg.K_n:
-            string += str(chr(event.key)).upper()
-        if event.key == pg.K_o:
-            string += str(chr(event.key)).upper()
-        if event.key == pg.K_p:
-            string += str(chr(event.key)).upper()
-        if event.key == pg.K_q:
-            string += str(chr(event.key)).upper()
-        if event.key == pg.K_r:
-            string += str(chr(event.key)).upper()
-        if event.key == pg.K_s:
-            string += str(chr(event.key)).upper()
-        if event.key == pg.K_t:
-            string += str(chr(event.key)).upper()
-        if event.key == pg.K_u:
-            string += str(chr(event.key)).upper()
-        if event.key == pg.K_v:
-            string += str(chr(event.key)).upper()
-        if event.key == pg.K_w:
-            string += str(chr(event.key)).upper()
-        if event.key == pg.K_x:
-            string += str(chr(event.key)).upper()
-        if event.key == pg.K_y:
-            string += str(chr(event.key)).upper()
-        if event.key == pg.K_z:
-            string += str(chr(event.key)).upper()
-
-        # Removes last letter from string
-        if event.key == pg.K_BACKSPACE:
-            string = string[:-1]
-        
-        # Returns string at current state
-        return string
-
     #-------GUI-DRAW-FUNCTIONS-------#
 
     ''' Prints text of you been flown to a new empty room '''
@@ -704,7 +641,7 @@ class Gui():
         pg.mouse.set_cursor(pg.cursors.diamond)
 
         # Defines difficulty dictonary and sets current difficulty
-        difficultys_dict = {"peacful" : (0, 0, 99, False, "score_saves\score_list_1.txt") , "eazy" : (0.1, 0.2, 10, False, "score_saves\score_list_2.txt") , "normal" : (0.2, 0.3, 5, False, "score_saves\score_list_3.txt") , "hard" : (0.25, 0.35, 5, True, "score_saves\score_list_4.txt")}
+        difficultys_dict = {"peacful" : (0, 0, 99, False, "GUI\score_saves\score_list_1.txt") , "eazy" : (0.1, 0.2, 10, False, "GUI\score_saves\score_list_2.txt") , "normal" : (0.2, 0.3, 5, False, "GUI\score_saves\score_list_3.txt") , "hard" : (0.25, 0.35, 5, True, "GUI\score_saves\score_list_4.txt")}
         difficulty = difficultys_dict["normal"]
 
         # Constant set FPS
@@ -880,7 +817,10 @@ class Gui():
                 if game_state == "victory":
                     # Player prints name
                     if event.type == pg.KEYDOWN and len(name) != 5:
-                        name = self.letter_input(event, name)
+                        if event.key == pg.K_BACKSPACE:
+                            name = name[:-1]
+                        else:
+                            name += event.unicode
                         if event.key == pg.K_RETURN:
                             game_state = "victory_2"
                             # If player just click enter don't save score
