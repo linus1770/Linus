@@ -4,6 +4,7 @@ import random
 import os
 
 
+
 #-------Constants-for-pygame------#
 '''  Main Class for Wumpus GUI '''
 class Gui():
