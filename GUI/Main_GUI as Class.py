@@ -407,7 +407,7 @@ class Gui():
         # Makes a yellow square
         rectagel = pg.Rect(10, 10, self.WIDTH-20, self.HEIGHT-20)
         pg.draw.rect(self.window, self.colors["YELLOW"], rectagel)
-
+        
         rules_txt_list = []
         # Adds rules to list
         rules_txt_list.append("You're locked in the culverts below CSC, where the voracious Wumpus lives.")
